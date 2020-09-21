@@ -121,8 +121,8 @@
             <div  v-for="task of tasks">
                 <h1>{{task.title}}</h1>
                 <h3>{{task.category_name}}</h3>
-                <button v-bind:id="task.id" v-on:click="deleteTask">Delete</button>
-                <button v-bind:id="task.id" v-on:click="editSelect">Update BUTTON</button>
+                <button v-bind:id="task.id" v-on:click="deleteTask" class="button4" style="background-color:#9a4ef1">Delete</button>
+                <button v-bind:id="task.id" v-on:click="editSelect" class="button4" style="background-color:#f14ebd">Update</button>
 
 
             </div>
