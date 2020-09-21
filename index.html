@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@1.2.2/dist/vuetify.min.js"></script>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+
+
+
+
+</head>
+<body>
+
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">TaskApp</a>
+        <button id="navbar-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span id="toggler-icon"class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="https://github.com/cairait/">Github <span class="sr-only">(current)</span></a>
+            </li>
+    
+              
+      </nav> -->
+<!-- NAV BAR CODE -->
+
+
+      
+
+    <div id="app">
+        <div id="nologin" v-if="!loggedin">
+            <div id="loginform">
+            
+                
+                <form v-on:submit.prevent="handleLogin">
+                <fieldset><legend>LOGIN</legend>
+                <input type="text" placeholder="username" v-model="loginUN">
+                <input type="password" placeholder="password" v-model="loginPW">
+                <!-- <input type="submit" value="create user">  -->
+                <button class="loginButton" v-on:click="handleLogin">login</button>
+                </fieldset>
+                </form>
+            </div>
+    </div>
+
+    <!-- NOW LOGGEDIN -->
+        <div id="login" v-if="loggedin">
+                <!-- BOOTSTRAP NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">TASKapp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/cairait/">Github</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li> -->
+            <!-- <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li> -->
+          </ul>
+          <div>
+            <button v-on:click="handleLogout">Logout</button>
+            </div>
+        </div>
+      </nav>
+      <!-- BOOTSTRAP NAVBAR -->
+            
+            <input type="text" v-model=newTask>
+            
+            
+            <select v-model="categoryId"> 
+                <option v-for="category of categories" v-bind:value="category.id">{{category.name}}</option>
+
+            </select>
+
+            <button v-on:click.prevent="createTask">Create Task</button>
+            <br>
+
+
+            <input type="text" v-model="editTask">
+
+            <select v-model="categoryId"> 
+                <option v-for="category of categories" v-bind:value="category.id">{{category.name}}</option>
+
+            </select>
+
+            <button v-on:click.prevent="updateTask" v-bind:id="editID">Update</button>
+            <!-- <div v-for="task of task" class="item-row">  -->
+
+                
+
+           
+            <div  v-for="task of tasks">
+                <h1>{{task.title}}</h1>
+                <h3>{{task.category_name}}</h3>
+                <button v-bind:id="task.id" v-on:click="deleteTask">Delete</button>
+                <button v-bind:id="task.id" v-on:click="editSelect">Update BUTTON</button>
+
+
+            </div>
+            <!-- <div>
+            <button v-on:click="handleLogout">Logout</button>
+            </div> -->
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+</body>
+</html>
