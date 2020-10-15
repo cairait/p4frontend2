@@ -57,9 +57,9 @@ const app = new Vue({
             this.token = null
         },
 
-        handleSignup: function(event){
+        handleSignup: function(){
             const URL = this.prodURL ? this.prodURL : this.devURL
-            const user = {username: this.createUN, email: this.createEMAIL, password: this.createPW}
+            const user = {username: this.createUN, password: this.createPW, email: this.createEMAIL}
 
             fetch(`${URL}/auth/users/register/`, {
              method: "POST",
@@ -73,15 +73,16 @@ const app = new Vue({
              .then(data => {
                  console.log(data)
 
-                 if(this.createEMAIL === "" && this.createUN === "" && this.createPW === ""|| data.error){
+                 if(this.createPW === "" && this.createUN === "" && this.createEMAIL === "" || data.error){
                  alert("SIGNUP UNSUCCESSFUL")
                  } else {
                     alert("SIGNUP SUCCESSFUL")
-                 this.createEMAIL = ""
-                 this.createUN = ""
                  this.createPW = ""
+                 this.createUN = ""
+                 this.createEMAIL = ""
                  }
              })
+
         },
 
 
