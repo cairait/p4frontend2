@@ -7,8 +7,9 @@ const app = new Vue({
         loginPW: "",
         createUN: "",
         createPW: "",
+        createEMAIL: "",
         devURL: "http://localhost:8000",
-        prodURL: null,
+        prodURL: "https://ctb4backend.herokuapp.com",
         user: null,
         token: null,
         categories: [],
@@ -55,6 +56,34 @@ const app = new Vue({
             this.user = null
             this.token = null
         },
+
+        handleSignup: function(event){
+            const URL = this.prodURL ? this.prodURL : this.devURL
+            const user = {username: this.createUN, email: this.createEMAIL, password: this.createPW}
+
+            fetch(`${URL}/auth/users/register/`, {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json"
+             },
+             body: JSON.stringify(user)
+
+             })
+             .then(response => response.json())
+             .then(data => {
+                 console.log(data)
+
+                 if(this.createEMAIL === "" && this.createUN === "" && this.createPW === ""|| data.error){
+                 alert("SIGNUP UNSUCCESSFUL")
+                 } else {
+                    alert("SIGNUP SUCCESSFUL")
+                 this.createEMAIL = ""
+                 this.createUN = ""
+                 this.createPW = ""
+                 }
+             })
+        },
+
 
 
         getTasks: function(){

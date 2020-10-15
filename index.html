@@ -40,7 +40,21 @@
 
     <div id="app">
         <div id="nologin" v-if="!loggedin">
-            <div id="loginform">
+            
+          <div id="signupform">
+            <form v-on:submit.prevent="handleSignup">
+              <fieldset><legend>SIGN UP</legend>
+              <input type="text" placeholder="username" v-model="createUN">
+              <input type="password" placeholder="password" v-model="createPW">
+              <input type="email" placeholder="email" v-model="createEMAIL">
+              <button class="signupButton" v-on:click="handleSignup">sign up</button>
+            </fieldset>
+            </form>
+            
+          </div>
+          
+          
+          <div id="loginform">
             
                 
                 <form v-on:submit.prevent="handleLogin">
@@ -52,6 +66,9 @@
                 </fieldset>
                 </form>
             </div>
+
+           
+
     </div>
 
     <!-- NOW LOGGEDIN -->
