@@ -7,7 +7,7 @@ const app = new Vue({
         loginPW: "",
         createUN: "",
         createPW: "",
-        createEMAIL: "",
+        createEmail: "",
         devURL: "http://localhost:8000",
         prodURL: "https://ctb4backend.herokuapp.com",
         user: null,
@@ -59,7 +59,7 @@ const app = new Vue({
 
         handleSignup: function(){
             const URL = this.prodURL ? this.prodURL : this.devURL
-            const user = {username: this.createUN, password: this.createPW, email: this.createEMAIL}
+            const user = {username: this.createUN, password: this.createPW, email: this.createEmail}
 
             fetch(`${URL}/auth/users/register/`, {
              method: "POST",
@@ -73,13 +73,13 @@ const app = new Vue({
              .then(data => {
                  console.log(data)
 
-                 if(this.createPW === "" && this.createUN === "" && this.createEMAIL === "" || data.error){
+                 if(this.createPW === "" && this.createUN === "" && this.createEmail === "" || data.error){
                  alert("SIGNUP UNSUCCESSFUL")
                  } else {
                     alert("SIGNUP SUCCESSFUL")
                  this.createPW = ""
                  this.createUN = ""
-                 this.createEMAIL = ""
+                 this.createEmail = ""
                  }
              })
 

@@ -110,10 +110,10 @@
       </nav>
       <!-- BOOTSTRAP NAVBAR -->
             
-            <input type="text" v-model=newTask>
+            <input type="text" v-model="newTask" placeholder="TASK">
             
             
-            <select v-model="categoryId"> 
+            <select v-model="categoryId" placeholder="ENTER URGENCY #1-4"> 
                 <option v-for="category of categories" v-bind:value="category.id">{{category.name}}</option>
 
             </select>
